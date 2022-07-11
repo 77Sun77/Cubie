@@ -70,6 +70,8 @@ public class TetrisBlock : MonoBehaviour
                 
                 AddToGrid();
                 enabled = false;
+                RotationController controller = GameObject.Find("RotationController").GetComponent<RotationController>();
+                if (controller.target == transform) controller.target = null;
                 overlap = false;
                 SpawnManager.instance.SpawnBlock();
             }
@@ -157,10 +159,4 @@ public class TetrisBlock : MonoBehaviour
         }
 
     }
-
-    void Array_For(Transform[,] temp, Transform[,] grid)
-    {
-
-    }
-
 }
