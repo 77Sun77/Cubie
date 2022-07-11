@@ -57,7 +57,7 @@ public class TetrisBlock : MonoBehaviour
             transform.localPosition += new Vector3(0, -1, 0);
             if (!ValidMove())
             {
-                transform.localPosition += new Vector3(0, 1, 0);
+                //transform.localPosition += new Vector3(0, 1, 0);
                 AddToGrid();
                 enabled = false;
                 SpawnManager.instance.SpawnBlock();
@@ -96,12 +96,12 @@ public class TetrisBlock : MonoBehaviour
             int x = Mathf.RoundToInt(vec.x);
             int y = Mathf.RoundToInt(vec.y);
 
-            if (x < 0 || x >= width || y < 0) return false;
+            if (x < 0 || x >= width || y <= 0) return false;
 
-            if (SpawnDirection == Direction.Left && Grid_Left[x, y] != null) return false;
-            if (SpawnDirection == Direction.Right && Grid_Right[x, y] != null) return false;
-            if (SpawnDirection == Direction.Up && Grid_Up[x, y] != null) return false;
-            if (SpawnDirection == Direction.Down && Grid_Down[x, y] != null) return false;
+            if (SpawnDirection == Direction.Left && Grid_Left[x, y-1] != null) return false;
+            if (SpawnDirection == Direction.Right && Grid_Right[x, y-1] != null) return false;
+            if (SpawnDirection == Direction.Up && Grid_Up[x, y-1] != null) return false;
+            if (SpawnDirection == Direction.Down && Grid_Down[x, y-1] != null) return false;
         }
         return true;
     }
