@@ -28,7 +28,7 @@ public class RotationController : MonoBehaviour
                     else
                     {
                         target.RotateAround(transform.TransformPoint(Vector3.zero), new Vector3(0, 0, 1), 90);
-                        if (target.tag == "Cubie") TetrisBlock.Grid_Rotation("Right");
+                        if (target.tag == "Cubie") TetrisBlock.Grid_Rotation("Left");
                         
                     }
                 }

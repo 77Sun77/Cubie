@@ -19,6 +19,7 @@ public class TetrisBlock : MonoBehaviour
 
 
     float time;
+    bool overlap;
 
     public void Set_Direction(int direction_Num, Transform parent)
     {
@@ -43,6 +44,9 @@ public class TetrisBlock : MonoBehaviour
         time = 0.8f;
 
         Cubie = GameObject.Find("Cubie");
+
+        overlap = false;
+
     }
 
     void Update()
@@ -54,12 +58,19 @@ public class TetrisBlock : MonoBehaviour
     {
         if(time <= 0)
         {
-            transform.localPosition += new Vector3(0, -1, 0);
+            if(!overlap) transform.localPosition += new Vector3(0, -1, 0);
             if (!ValidMove())
             {
-                //transform.localPosition += new Vector3(0, 1, 0);
+                transform.localPosition += new Vector3(0, 1, 0);
+                if (!ValidMove())
+                {
+                    overlap = true;
+                    return;
+                }
+                
                 AddToGrid();
                 enabled = false;
+                overlap = false;
                 SpawnManager.instance.SpawnBlock();
             }
 
@@ -96,12 +107,12 @@ public class TetrisBlock : MonoBehaviour
             int x = Mathf.RoundToInt(vec.x);
             int y = Mathf.RoundToInt(vec.y);
 
-            if (x < 0 || x >= width || y <= 0) return false;
+            if (x < 0 || x >= width || y < 0) return false;
 
-            if (SpawnDirection == Direction.Left && Grid_Left[x, y-1] != null) return false;
-            if (SpawnDirection == Direction.Right && Grid_Right[x, y-1] != null) return false;
-            if (SpawnDirection == Direction.Up && Grid_Up[x, y-1] != null) return false;
-            if (SpawnDirection == Direction.Down && Grid_Down[x, y-1] != null) return false;
+            if (SpawnDirection == Direction.Left && Grid_Left[x, y] != null) return false;
+            if (SpawnDirection == Direction.Right && Grid_Right[x, y] != null) return false;
+            if (SpawnDirection == Direction.Up && Grid_Up[x, y] != null) return false;
+            if (SpawnDirection == Direction.Down && Grid_Down[x, y] != null) return false;
         }
         return true;
     }
@@ -135,7 +146,6 @@ public class TetrisBlock : MonoBehaviour
             Grid_Up = Grid_Right;
             Grid_Right = Grid_Down;
             Grid_Down = temp;
-            
         }
         else
         {
@@ -147,4 +157,10 @@ public class TetrisBlock : MonoBehaviour
         }
 
     }
+
+    void Array_For(Transform[,] temp, Transform[,] grid)
+    {
+
+    }
+
 }
