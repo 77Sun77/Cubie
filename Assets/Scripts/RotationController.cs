@@ -27,12 +27,11 @@ public class RotationController : MonoBehaviour
                         {
                             TetrisBlock.Grid_Rotation("Right");
                             target.RotateAround(transform.TransformPoint(Vector3.zero), new Vector3(0, 0, 1), -90);
-                        }
+                        }                      
                         else
                         {
-                            Quaternion angle = Quaternion.identity;
-                            angle.eulerAngles = target.rotation.eulerAngles + Quaternion.Euler(0, 0, -90).eulerAngles;
-                            target.rotation = angle;
+                            TetrisBlock block = target.GetComponent<TetrisBlock>();
+                            target.RotateAround(target.TransformPoint(block.anchorPoint), new Vector3(0, 0, 1), -90);
 
                         }
                     }
@@ -46,9 +45,8 @@ public class RotationController : MonoBehaviour
                         }
                         else
                         {
-                            Quaternion angle = Quaternion.identity;
-                            angle.eulerAngles = target.rotation.eulerAngles + Quaternion.Euler(0, 0, 90).eulerAngles;
-                            target.rotation = angle;
+                            TetrisBlock block = target.GetComponent<TetrisBlock>();
+                            target.RotateAround(target.TransformPoint(block.anchorPoint), new Vector3(0, 0, 1), 90);
                         }
                         
                     }

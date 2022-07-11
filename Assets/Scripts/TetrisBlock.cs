@@ -6,13 +6,14 @@ public class TetrisBlock : MonoBehaviour
 {
     public GameObject Cubie;
 
-    public static Transform[,] Grid_Left = new Transform[7, 20];
-    public static Transform[,] Grid_Right = new Transform[7, 20];
-    public static Transform[,] Grid_Up = new Transform[7, 20];
-    public static Transform[,] Grid_Down = new Transform[7, 20];
+    public static Transform[,] Grid_Left = new Transform[9, 20];
+    public static Transform[,] Grid_Right = new Transform[9, 20];
+    public static Transform[,] Grid_Up = new Transform[9, 20];
+    public static Transform[,] Grid_Down = new Transform[9, 20];
 
-    public static int width = 7;
+    public static int width = 9;
 
+    public Vector3 anchorPoint;
     enum Direction { Left, Right, Up, Down};
     Direction SpawnDirection;
     Transform parent;
