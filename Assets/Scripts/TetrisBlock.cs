@@ -83,6 +83,8 @@ public class TetrisBlock : MonoBehaviour
         {
             time -= Time.deltaTime;
         }
+
+        
     }
 
     void AddToGrid()
