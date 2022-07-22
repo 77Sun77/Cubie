@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CubieRotation : MonoBehaviour
 {
-    public Transform Cubie;
+    public Transform Cubie, Collider;
     Vector3 destination, direction;
 
     public bool isRotation;
     void Start()
     {
         Cubie = GameObject.Find("Cubie").transform;
+        Collider = GameObject.Find("Collider").transform;
 
         isRotation = false;
     }
@@ -39,6 +40,8 @@ public class CubieRotation : MonoBehaviour
         if (name == "Right") direction = new Vector3(0, 0, -1);
         destination = Cubie.eulerAngles + (direction * 90);
         isRotation = true;
+
+        Collider.rotation = Quaternion.Euler(destination);
     }
 
     public void Left()

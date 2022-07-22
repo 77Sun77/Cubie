@@ -52,11 +52,30 @@ public class BlockMove : MonoBehaviour
             int y = Mathf.RoundToInt(vec.y);
             transform.position = new Vector3(x, y, 0);
             transform.parent = Cubie.transform;
+            BlockClone();
+            foreach (Transform children in transform) children.GetComponent<BoxCollider2D>().enabled = false;
             isArrival = true;
             SpawnManager.instance.SpawnBlock();
             //enabled = false;
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
         
-        
+    }
+
+    void BlockClone()
+    {
+        GameObject go = Instantiate(gameObject, GameObject.Find("Collider").transform);
+        go.GetComponent<BlockMove>().Clone_Setting(transform);
+    }
+
+    public void Clone_Setting(Transform originar)
+    {
+        Color color = new Color(0, 0, 0, 0);
+        foreach (Transform children in transform) children.GetComponent<SpriteRenderer>().color = color;
+        GetComponent<BlockMove>().enabled = false;
+        col_Count = 1;
     }
 }
