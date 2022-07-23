@@ -10,6 +10,9 @@ public class BlockMove : MonoBehaviour
     Vector3 rotation;
     CubieRotation cubieRotation;
 
+    public static Transform[,] Blocks = new Transform[40, 40];
+    Vector3 pos, pos_Temp;
+
     public void Set_Direction(Transform parent)
     {
         this.parent = parent;
@@ -23,17 +26,20 @@ public class BlockMove : MonoBehaviour
 
         isMove = true;
         isArrival = false;
-        col_Count = 0;
 
         rotation = transform.eulerAngles;
-
     }
 
     void Update()
     {
         Block_Move();
-        if (!cubieRotation.isRotation) isArrival = false;
-        else if(isArrival && cubieRotation.isRotation) transform.rotation = Quaternion.Euler(rotation);
+
+        if(isArrival && transform.localPosition != pos_Temp)
+        {
+            transform.localPosition = pos_Temp;
+            print(pos_Temp);
+        }
+       
     }
 
     void Block_Move()
@@ -47,35 +53,70 @@ public class BlockMove : MonoBehaviour
         col_Count++;
         if (col_Count == 1)
         {
-            Vector3 vec = transform.position;
-            int x = Mathf.RoundToInt(vec.x);
-            int y = Mathf.RoundToInt(vec.y);
-            transform.position = new Vector3(x, y, 0);
-            transform.parent = Cubie.transform;
-            BlockClone();
-            foreach (Transform children in transform) children.GetComponent<BoxCollider2D>().enabled = false;
+            First:
+            if (!Valid())
+            {
+                transform.localPosition += new Vector3(0, 1, 0);
+                goto First;
+            }
+            else AddToGrid();
             isArrival = true;
+            Transform clone = BlockClone();
+            transform.parent = Cubie.transform;
+            transform.localPosition = Cubie.transform.InverseTransformPoint(pos);
+            transform.localRotation = clone.localRotation;
+            pos_Temp = Cubie.transform.InverseTransformPoint(clone.position);
+            print(Cubie.transform.InverseTransformPoint(pos));
+            foreach (Transform children in transform) children.GetComponent<BoxCollider2D>().enabled = false;
             SpawnManager.instance.SpawnBlock();
             //enabled = false;
         }
     }
 
-    private void OnTriggerStay2D(Collider2D col)
+    bool Valid()
     {
-        
+        Vector3 vec = transform.position;
+        int x = Mathf.RoundToInt(vec.x);
+        int y = Mathf.RoundToInt(vec.y);
+        transform.position = new Vector3(x, y, 0);
+        foreach (Transform children in transform)
+        {
+            vec = GameObject.Find("Collider").transform.InverseTransformPoint(children.position);
+            x = Mathf.RoundToInt(vec.x);
+            y = Mathf.RoundToInt(vec.y);
+            if (Blocks[x, y] != null) return false;
+        }
+        pos = transform.position;
+        pos = new Vector3(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+        return true;
+    }
+    void AddToGrid()
+    {
+        foreach (Transform children in transform)
+        {
+            Vector3 vec = GameObject.Find("Collider").transform.InverseTransformPoint(children.position);
+            int x = Mathf.RoundToInt(vec.x);
+            int y = Mathf.RoundToInt(vec.y);
+            Blocks[x, y] = children;
+        }
     }
 
-    void BlockClone()
+    Transform BlockClone()
     {
-        GameObject go = Instantiate(gameObject, GameObject.Find("Collider").transform);
+        GameObject go = Instantiate(gameObject);
+        go.transform.position = pos;
+        print(Camera.main.transform.InverseTransformPoint(go.transform.position));
+        go.transform.rotation = transform.rotation;
+        go.transform.parent = GameObject.Find("Collider").transform;
         go.GetComponent<BlockMove>().Clone_Setting(transform);
+        return go.transform;
     }
 
     public void Clone_Setting(Transform originar)
     {
         Color color = new Color(0, 0, 0, 0);
         foreach (Transform children in transform) children.GetComponent<SpriteRenderer>().color = color;
-        GetComponent<BlockMove>().enabled = false;
+        enabled = false;
         col_Count = 1;
     }
 }
