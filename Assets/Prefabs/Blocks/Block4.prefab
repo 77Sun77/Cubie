@@ -454,7 +454,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7130981791215587114}
   - component: {fileID: 7389802800701323403}
-  - component: {fileID: 6873090298701245957}
   m_Layer: 0
   m_Name: Block4
   m_TagString: Untagged
@@ -502,16 +501,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6873090298701245957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6715323773759850311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d162e9c0381028d469504540dc8f9561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cubie: {fileID: 0}
