@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        SpawnBlock();
+        //SpawnBlock();
     }
 
     void Update()
