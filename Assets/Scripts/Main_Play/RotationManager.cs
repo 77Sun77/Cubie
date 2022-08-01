@@ -29,11 +29,11 @@ public class RotationManager : MonoBehaviour
 
     void CubieRotation(Vector3 direction)
     {
-        Cubie.RotateAround(Vector3.zero, direction, 30);
+        Cubie.RotateAround(Vector3.zero, direction, 15);
     }
     void BlockRotation(Vector3 direction)
     {
-        
+        block.RotateAround(block.parent.TransformPoint(Vector3.zero), direction, 90);
     }
 
     public void OnClick_Left()
@@ -52,5 +52,10 @@ public class RotationManager : MonoBehaviour
     {
         if (selected_Object == Object_Kinds.Cubie) selected_Object = Object_Kinds.Block;
         else selected_Object = Object_Kinds.Cubie;
+    }
+
+    public void Reset_Object()
+    {
+        selected_Object = Object_Kinds.Cubie;
     }
 }

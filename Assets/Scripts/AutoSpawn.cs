@@ -19,7 +19,6 @@ public class AutoSpawn : MonoBehaviour
         transform.parent = GameObject.Find("Lines").transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
