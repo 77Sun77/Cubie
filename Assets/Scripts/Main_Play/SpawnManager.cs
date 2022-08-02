@@ -22,9 +22,9 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnBlock()
     {
-        GameObject block = Instantiate(Blocks[Random.Range(0, Blocks.Count)]);
-        Vector3 rotation = new Vector3(0, 0, 15) * Random.Range(0, 24);
-        block.GetComponent<Block>().Block_Setting(rotation, new Vector3(0,15,0));
+        int point = Random.Range(0, 24);
+        GameObject block = Instantiate(Blocks[Random.Range(0, Blocks.Count)], GameObject.Find(point.ToString()).transform);
+        block.GetComponent<Block>().Block_Setting(new Vector3(0,15,0), point);
         RotationManager.instance.Reset_Object();
     }
 }

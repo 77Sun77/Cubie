@@ -14,7 +14,7 @@ public class AutoSpawn : MonoBehaviour
             go.transform.RotateAround(transform.parent.position, new Vector3(0,0,1), angle);
             angle += 15;
             go.GetComponent<AutoSpawn>().enabled = false;
-            go.transform.GetChild(0).parent = GameObject.Find("Lines").transform;
+            go.transform.parent = GameObject.Find("Lines").transform;
         }    
         transform.parent = GameObject.Find("Lines").transform;
     }
