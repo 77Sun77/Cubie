@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
     {
         int point = Random.Range(0, 24);
         GameObject block = Instantiate(Blocks[Random.Range(0, Blocks.Count)], GameObject.Find(point.ToString()).transform);
-        block.GetComponent<Block>().Block_Setting(new Vector3(0,15,0), point);
+        block.GetComponent<Block>().Block_Setting(new Vector3(0,7,0), point, Block.BlockState.Original);
         RotationManager.instance.Reset_Object();
     }
 }
