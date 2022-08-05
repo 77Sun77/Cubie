@@ -8,23 +8,33 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Block")]
     public List<GameObject> Blocks = new List<GameObject>();
-    
+
+    GameObject Block_Past;
+
     void Start()
     {
         instance = this;
         SpawnBlock();
     }
 
-    void Update()
-    {
-        
-    }
+   
 
     public void SpawnBlock()
     {
-        GameObject block = Instantiate(Blocks[Random.Range(0, Blocks.Count)]);
-        Vector3 rotation = new Vector3(0, 0, 15) * Random.Range(0, 24);
-        block.GetComponent<Block>().Block_Setting(rotation, new Vector3(0,15,0));
+        if(Block_Past)
+            Destroy(Block_Past);
+
+        int ranrot = Random.Range(0, 24);
+        Block_Past = Instantiate(Blocks[Random.Range(0, Blocks.Count)]);
+        Vector3 rotation = new Vector3(0, 0, 15) * ranrot;
+        Block_Past.GetComponent<Block>().Block_Setting(rotation, new Vector3(0,15,0));
         RotationManager.instance.Reset_Object();
+
+        NewWorldManager.instance.SpawnBlock(ranrot+RotationManager.instance.offset);
+        Debug.Log(ranrot + RotationManager.instance.offset);
+
+        Debug.Log("스폰 매니저 스폰");
     }
+    
+    
 }

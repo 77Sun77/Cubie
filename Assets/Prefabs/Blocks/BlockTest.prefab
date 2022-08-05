@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6759653108299179423}
   - component: {fileID: 4178939330797816091}
   - component: {fileID: 6588026506705426766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlockTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6175478226d15114387a3dd4ae854339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockSpeed: 1
   Block_Kind: 0
+  isActive: 0
 --- !u!1 &970310789883700003
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +82,7 @@ GameObject:
   - component: {fileID: 6977116761158853560}
   - component: {fileID: 5683354047495200395}
   - component: {fileID: 489597844203986174}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6175478226d15114387a3dd4ae854339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockSpeed: 0
   Block_Kind: 1
+  isActive: 0
 --- !u!1 &1256184397555206428
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +209,7 @@ GameObject:
   - component: {fileID: 7383845210060109730}
   - component: {fileID: 7946479715529006746}
   - component: {fileID: 3330543842920184055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6175478226d15114387a3dd4ae854339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockSpeed: 0
   Block_Kind: 1
+  isActive: 0
 --- !u!1 &5946846640604840721
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4314256827529047334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Block_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +371,7 @@ GameObject:
   - component: {fileID: 1049202130536688118}
   - component: {fileID: 6506816781388963169}
   - component: {fileID: 136695281023379012}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +483,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6175478226d15114387a3dd4ae854339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockSpeed: 0
   Block_Kind: 1
+  isActive: 0
 --- !u!1 &7191772077114141562
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +498,7 @@ GameObject:
   - component: {fileID: 207172379817099507}
   - component: {fileID: 7249241783996106189}
   - component: {fileID: 2619171213375627699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,4 +610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6175478226d15114387a3dd4ae854339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockSpeed: 0
   Block_Kind: 1
+  isActive: 0

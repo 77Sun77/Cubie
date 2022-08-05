@@ -9,6 +9,11 @@ public class RotationManager : MonoBehaviour
     enum Object_Kinds { Cubie, Block };
     Object_Kinds selected_Object;
     Transform Cubie, block;
+
+    NewBlock newblock;
+
+    public int offset;
+
     void Awake()
     {
         instance = this;
@@ -16,11 +21,11 @@ public class RotationManager : MonoBehaviour
         selected_Object = Object_Kinds.Cubie;
     }
 
-    
-    void Update()
+    public void Set_NewBlock(NewBlock _newBlock)
     {
-        
+        newblock= _newBlock;
     }
+
 
     public void Set_Block(Transform block)
     {
@@ -38,14 +43,44 @@ public class RotationManager : MonoBehaviour
 
     public void OnClick_Left()
     {
-        if (selected_Object == Object_Kinds.Cubie) CubieRotation(new Vector3(0, 0, 1));
-        else BlockRotation(new Vector3(0, 0, 1));
+        if (selected_Object == Object_Kinds.Cubie)
+        {
+            if (!newblock.MoveR())
+                return;
+            CubieRotation(new Vector3(0, 0, 1));
+            offset++;
+        }
+        else
+        {
+            if (!newblock.RotR())
+                return;
+            BlockRotation(new Vector3(0, 0, 1));
+            
+        }
+
     }
 
     public void OnClick_Right()
     {
-        if (selected_Object == Object_Kinds.Cubie) CubieRotation(new Vector3(0, 0, -1));
-        else BlockRotation(new Vector3(0, 0, -1));
+        if (selected_Object == Object_Kinds.Cubie)
+        {
+            if (!newblock.MoveL())
+                return;
+
+         
+            CubieRotation(new Vector3(0, 0, -1));
+            
+            offset--;
+
+        }
+        else
+        {
+            if (!newblock.RotL())
+                return;
+            BlockRotation(new Vector3(0, 0, -1));
+          
+        }
+
     }
 
     public void Changed_Object()
