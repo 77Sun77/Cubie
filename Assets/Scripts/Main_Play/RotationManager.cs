@@ -48,6 +48,7 @@ public class RotationManager : MonoBehaviour
             if (!newblock.MoveR())
                 return;
             CubieRotation(new Vector3(0, 0, 1));
+            Debug.Log("ÁÂÅ¬");
             offset++;
         }
         else
@@ -69,7 +70,7 @@ public class RotationManager : MonoBehaviour
 
          
             CubieRotation(new Vector3(0, 0, -1));
-            
+            Debug.Log("¿ìÅ¬");
             offset--;
 
         }

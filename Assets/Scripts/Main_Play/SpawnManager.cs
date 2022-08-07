@@ -30,8 +30,10 @@ public class SpawnManager : MonoBehaviour
         Block_Past.GetComponent<Block>().Block_Setting(rotation, new Vector3(0,15,0));
         RotationManager.instance.Reset_Object();
 
-        NewWorldManager.instance.SpawnBlock(ranrot+RotationManager.instance.offset);
-        Debug.Log(ranrot + RotationManager.instance.offset);
+        int actualIndex = RotationManager.instance.offset % 24;
+
+        NewWorldManager.instance.SpawnBlock(ranrot+ actualIndex);
+        Debug.Log(ranrot + actualIndex);
 
         Debug.Log("스폰 매니저 스폰");
     }
