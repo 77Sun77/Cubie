@@ -27,7 +27,7 @@ public class SpawnManager : MonoBehaviour
         int ranrot = Random.Range(0, 24);
         Block_Past = Instantiate(Blocks[Random.Range(0, Blocks.Count)]);
         Vector3 rotation = new Vector3(0, 0, 15) * ranrot;
-        Block_Past.GetComponent<Block>().Block_Setting(rotation, new Vector3(0,15,0));
+        Block_Past.GetComponent<Block>().Block_Setting(rotation, new Vector3(0,14.65f,0));
         RotationManager.instance.Reset_Object();
 
         int actualIndex = ranrot + RotationManager.instance.offset;

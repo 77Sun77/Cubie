@@ -23,12 +23,16 @@ public class NewBlock : MonoBehaviour
         CheckSideToSide();
 
 
-    } 
+    }
 
+    void Start()
+    {
+        curdelay = Time.time;
+    }
 
     void Update()
     {
-        check = ValidMove();
+        //check = ValidMove();
 
         //미리 이동시켜놓고 검증결과가 false일시 다시 원상태로 복귀시키는 코드
         if (Input.GetKeyDown(KeyCode.D))
@@ -48,31 +52,33 @@ public class NewBlock : MonoBehaviour
             RotL();
         }
 
+
+        
         if (Time.time - curdelay > falltime)
         {
             transform.position += new Vector3(0, -1, 0);
             curdelay = Time.time;
-            if (ValidMove() == false)
+            if (!ValidMove(1))
             {
-                transform.position -= new Vector3(0, -1, 0);
+                //transform.position -= new Vector3(0, -1, 0);
                 this.enabled = false;
                 AddToGrid();
 
                 //Debug.Log("스폰");
                 SpawnManager.instance.SpawnBlock();
-
             }
         }
+        
     }
 
-   public bool MoveR()
+    public bool MoveR()
    {
         transform.position += new Vector3(1, 0, 0);
 
         LineUp();
         CheckSideToSide();
 
-        if (ValidMove() == false)
+        if (ValidMove(0) == false)
         {
             transform.position -= new Vector3(1, 0, 0);
             LineUp();
@@ -89,7 +95,7 @@ public class NewBlock : MonoBehaviour
         LineUp();
         CheckSideToSide();
 
-        if (ValidMove() == false)
+        if (ValidMove(0) == false)
         {
             transform.position -= new Vector3(-1, 0, 0);
             LineUp();
@@ -108,7 +114,7 @@ public class NewBlock : MonoBehaviour
         LineUp();
         CheckSideToSide();
 
-        if (ValidMove() == false)
+        if (ValidMove(0) == false)
         {
             transform.RotateAround(transform.TransformPoint(anchorPoint), new Vector3(0, 0, 1), -90);
             LineUp();
@@ -126,7 +132,7 @@ public class NewBlock : MonoBehaviour
         LineUp();
         CheckSideToSide();
 
-        if (ValidMove() == false)
+        if (ValidMove(0) == false)
         {
             transform.RotateAround(transform.TransformPoint(anchorPoint), new Vector3(0, 0, 1), 90);
             LineUp();
@@ -191,7 +197,7 @@ public class NewBlock : MonoBehaviour
     }
 
 
-   public bool ValidMove()
+   public bool ValidMove(int index)
     {
         foreach (Transform children in transform)
         {
@@ -199,13 +205,13 @@ public class NewBlock : MonoBehaviour
 
 
             int roundedX = Mathf.RoundToInt(localLoc.x);
-            int roundedY = Mathf.RoundToInt(localLoc.y);
+            int roundedY = Mathf.RoundToInt(localLoc.y) - index;
 
             //Debug.Log(roundedX + "," + roundedY);
 
 
             //아래로 갔을때 이동제한
-            if (localLoc.y < 1)
+            if (localLoc.y-index < 1)
             {
                 return false;
             }
@@ -242,7 +248,7 @@ public class NewBlock : MonoBehaviour
                     CheckSideToSide();
 
 
-                    if (ValidMove() == false)
+                    if (ValidMove(0) == false)
                     {
                         transform.position = new Vector3(1, transform.position.y, 0);
                         LineUp();
@@ -267,7 +273,7 @@ public class NewBlock : MonoBehaviour
                     LineUp();
                     CheckSideToSide();
 
-                    if (ValidMove() == false)
+                    if (ValidMove(0) == false)
                     {
                         transform.position = transform.position = new Vector3(NewWorldManager.width - 2, transform.position.y, 0);
                         LineUp();

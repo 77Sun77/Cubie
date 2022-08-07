@@ -15411,7 +15411,7 @@ MonoBehaviour:
   Tetrinos:
   - {fileID: 287415687904850749, guid: ba21224602aee3e498de2b6b236c95fe, type: 3}
   - {fileID: 287415687904850749, guid: 5bac117c242728e409ee50034ba4398b, type: 3}
-  SpawnHeight: 12
+  SpawnHeight: 11
 --- !u!1 &1883211974
 GameObject:
   m_ObjectHideFlags: 0
