@@ -11,7 +11,7 @@ public class Block : MonoBehaviour
     public void Block_Setting(Vector3 spawnPoint, int point, BlockState state)
     {
         transform.localPosition = spawnPoint;
-        RotationManager.instance.Set_Block(transform.GetChild(0));
+        if(state == BlockState.Original) RotationManager.instance.Set_Block(transform.GetChild(0));
         blocks_Parent = transform.GetChild(0);
         this.point = point;
         block = state;
@@ -32,6 +32,7 @@ public class Block : MonoBehaviour
 
         if(block == BlockState.Clone)
         {
+            print(blocks.Count);
             if(blocks.Count == blocks_Parent.childCount)
             {
                 foreach (GameObject block in blocks)
@@ -58,13 +59,13 @@ public class Block : MonoBehaviour
             }
             else
             {
+                print(transform.localPosition);
                 Vector3 vec = transform.localPosition;
                 int y = 0;
-                if (Mathf.RoundToInt(vec.y) != 0) y = Mathf.CeilToInt(vec.y);
+                y = Mathf.RoundToInt(vec.y);
+                //if (Mathf.RoundToInt(vec.y) != 0) y = Mathf.CeilToInt(vec.y);
                 transform.localPosition = new Vector3(vec.x, y);
-                AddToGrid();
-                SpawnManager.instance.SpawnBlock();
-                Clone_Block();
+                if(AddToGrid()) Clone_Block();
                 Destroy(gameObject);
             }
         }
@@ -72,6 +73,7 @@ public class Block : MonoBehaviour
     }
     void Clone_Block()
     {
+        SpawnManager.instance.SpawnBlock();
         Block go = Instantiate(gameObject,transform.parent).GetComponent<Block>();
         go.Block_Setting(transform.localPosition, point, BlockState.Clone);
         foreach(Transform children in go.blocks_Parent)
@@ -121,7 +123,7 @@ public class Block : MonoBehaviour
         }
         
     }
-    void AddToGrid()
+    bool AddToGrid()
     {
         foreach (Transform block in blocks_Parent)
         {
@@ -129,24 +131,33 @@ public class Block : MonoBehaviour
             int x = Mathf.RoundToInt(vec.x);
             int y = Mathf.RoundToInt(vec.y);
 
+            if(y >= 5)
+            {
+                return false;
+            }
+
             Blocks[X_Calculation(x), y] = 1;
         }
+        return true;
     }
     bool ValidMove()
     {
         foreach(Transform block in blocks_Parent)
         {
             Vector3 vec = transform.parent.InverseTransformPoint(block.transform.position);
-            int x = Mathf.FloorToInt(block.localPosition.x);
+            int x = Mathf.FloorToInt(vec.x);
             int y = Mathf.FloorToInt(vec.y);
 
-            if (transform.localPosition.y <= 0) return false;
-
+            if (transform.localPosition.y <= 0 || y < 0) return false;
+            if (x == -2) print(block);
             if (y < 5)
             {
-                print(X_Calculation(x));
+                print(y);
                 if (Blocks[X_Calculation(x), y] == 1)
                 {
+                    print(x);
+                    print(X_Calculation(x)+","+y);
+                    print(block);
                     return false;
                 }
             }
