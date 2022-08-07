@@ -21,6 +21,9 @@ public class RotationManager : MonoBehaviour
         selected_Object = Object_Kinds.Cubie;
     }
 
+    
+
+
     public void Set_NewBlock(NewBlock _newBlock)
     {
         newblock= _newBlock;
@@ -50,6 +53,8 @@ public class RotationManager : MonoBehaviour
             CubieRotation(new Vector3(0, 0, 1));
             Debug.Log("ÁÂÅ¬");
             offset++;
+            OffsetCheck();
+
         }
         else
         {
@@ -72,7 +77,7 @@ public class RotationManager : MonoBehaviour
             CubieRotation(new Vector3(0, 0, -1));
             Debug.Log("¿ìÅ¬");
             offset--;
-
+            OffsetCheck();
         }
         else
         {
@@ -84,6 +89,25 @@ public class RotationManager : MonoBehaviour
 
     }
 
+    void OffsetCheck()
+    {
+        if (offset==-1)
+        {
+            offset = 23;
+        }
+        else if(offset ==24)
+        {
+            offset = 0;
+        }
+
+
+
+    }
+
+
+
+
+
     public void Changed_Object()
     {
         if (selected_Object == Object_Kinds.Cubie) selected_Object = Object_Kinds.Block;
@@ -94,4 +118,8 @@ public class RotationManager : MonoBehaviour
     {
         selected_Object = Object_Kinds.Cubie;
     }
+
+
+    
+
 }

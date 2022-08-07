@@ -13,7 +13,7 @@ public class Block : MonoBehaviour
     public void Block_Setting(Vector3 rotation, Vector3 spawnPoint)
     {
         transform.position = spawnPoint;
-        transform.RotateAround(Vector3.zero, new Vector3(0,0,-1), rotation.z);
+        transform.RotateAround(Vector3.zero, new Vector3(0, 0, -1), rotation.z);
         RotationManager.instance.Set_Block(transform.GetChild(0));
         blocks_Parent = transform.GetChild(0);
         isActive = true;
@@ -25,7 +25,7 @@ public class Block : MonoBehaviour
 
     void Start()
     {
-        if(Block_Kind == Kinds.Piece) parentBlock = transform.parent.parent.GetComponent<Block>();
+        if (Block_Kind == Kinds.Piece) parentBlock = transform.parent.parent.GetComponent<Block>();
     }
 
     void Update()
@@ -35,10 +35,11 @@ public class Block : MonoBehaviour
 
     void Block_Move()
     {
-        if(isActive) transform.Translate(Vector3.down * 1 * blockSpeed * Time.deltaTime);
+        if (isActive) transform.Translate(Vector3.down * 1 * blockSpeed * Time.deltaTime);
     }
+}
 
-    public void OnTriggerEnter2D(Collider2D col)
+   /* public void OnTriggerEnter2D(Collider2D col)
     {
 
         if (Block_Kind == Kinds.Piece && !col.CompareTag("Cubie"))
@@ -81,3 +82,4 @@ public class Block : MonoBehaviour
 
 
 }
+   */

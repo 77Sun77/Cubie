@@ -11799,7 +11799,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1505361408}
-  - component: {fileID: 1505361409}
   m_Layer: 0
   m_Name: Cubie
   m_TagString: Untagged
@@ -11816,7 +11815,7 @@ Transform:
   m_GameObject: {fileID: 1505361407}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.518764, y: 5.518764, z: 1}
+  m_LocalScale: {x: 5.36, y: 5.36, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1630316874}
@@ -11824,19 +11823,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1505361409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505361407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556187b4ae145944d9a193d3ebe43009, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GO: {fileID: 2329903911959764522, guid: 8222b38d9d04dca4ab95105db9b32814, type: 3}
 --- !u!1 &1508149061
 GameObject:
   m_ObjectHideFlags: 0
@@ -15425,7 +15411,7 @@ MonoBehaviour:
   Tetrinos:
   - {fileID: 287415687904850749, guid: ba21224602aee3e498de2b6b236c95fe, type: 3}
   - {fileID: 287415687904850749, guid: 5bac117c242728e409ee50034ba4398b, type: 3}
-  SpawnHeight: 11
+  SpawnHeight: 12
 --- !u!1 &1883211974
 GameObject:
   m_ObjectHideFlags: 0
