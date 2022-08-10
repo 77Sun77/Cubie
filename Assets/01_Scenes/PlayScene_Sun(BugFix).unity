@@ -539,7 +539,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1340, y: -2460}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &61531146
 GameObject:
@@ -1608,7 +1608,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1440, y: 2560}
+  m_ReferenceResolution: {x: 900, y: 1600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1625,8 +1625,8 @@ Canvas:
   m_GameObject: {fileID: 175135407}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 357704993}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -7076,10 +7076,10 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -533, y: -1109}
-  m_SizeDelta: {x: 150, y: 150}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -275, y: 83.29645}
+  m_SizeDelta: {x: -690, y: 200}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &862810659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10259,7 +10259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 287415687904850748, guid: 5bac117c242728e409ee50034ba4398b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 287415687904850748, guid: 5bac117c242728e409ee50034ba4398b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10303,7 +10303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 287415687904850749, guid: 5bac117c242728e409ee50034ba4398b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 287415687904850751, guid: 5bac117c242728e409ee50034ba4398b, type: 3}
@@ -11985,10 +11985,10 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 533, y: -1109}
-  m_SizeDelta: {x: 150, y: 150}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 275, y: 83.29645}
+  m_SizeDelta: {x: -690, y: 200}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1520451163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12901,11 +12901,11 @@ RectTransform:
   m_Father: {fileID: 1448143276}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 533, y: -760}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -73.25223, y: 386.23895}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1633320654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14981,7 +14981,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Blocks:
+  - {fileID: 862626655048299716, guid: 904a86602b7996940aa4384a1185ed5e, type: 3}
+  - {fileID: 862626655048299716, guid: b8f622daa4f479645885cac793352dba, type: 3}
+  - {fileID: 862626655048299716, guid: ebe236be131767c469b1c161465ceee1, type: 3}
+  - {fileID: 862626655048299716, guid: e2c2a0b2040a25941a8183da17ecbe1b, type: 3}
+  - {fileID: 862626655048299716, guid: e08c993cfb510e3479b27d4eefeffe59, type: 3}
   - {fileID: 862626655048299716, guid: 1fc206ca27de89d48a3aa723f762cbd8, type: 3}
+  - {fileID: 862626655048299716, guid: 6bca2632e2db7b243b2b5f2cbf1362bb, type: 3}
+  devindex: 0
 --- !u!1 &1803492061
 GameObject:
   m_ObjectHideFlags: 0
@@ -15408,9 +15415,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e449f9b6e04bd549a1df97455c128cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridState: 0
   Tetrinos:
+  - {fileID: 287415687904850749, guid: 22d6b565ef2aa2c47ae03e1c4e38b2be, type: 3}
+  - {fileID: 287415687904850749, guid: 68a0e12507b88384aa7b753df288d386, type: 3}
+  - {fileID: 287415687904850749, guid: 8292bcbdecde12f40a11456938fd91f3, type: 3}
+  - {fileID: 287415687904850749, guid: 77afd4e4bfaae574380ce53bf6c0e135, type: 3}
+  - {fileID: 287415687904850749, guid: bcd3502d0c51cfa48b403021dcf1593d, type: 3}
   - {fileID: 287415687904850749, guid: ba21224602aee3e498de2b6b236c95fe, type: 3}
-  - {fileID: 287415687904850749, guid: 5bac117c242728e409ee50034ba4398b, type: 3}
+  - {fileID: 287415687904850749, guid: 587aca2d6bb90244d9d76b359fb13a5f, type: 3}
   SpawnHeight: 11
 --- !u!1 &1883211974
 GameObject:

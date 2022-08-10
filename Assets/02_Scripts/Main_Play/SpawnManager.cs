@@ -11,6 +11,8 @@ public class SpawnManager : MonoBehaviour
 
     GameObject Block_Past;
 
+    public int devindex;
+
     void Start()
     {
         instance = this;
@@ -24,8 +26,12 @@ public class SpawnManager : MonoBehaviour
         if(Block_Past)
             Destroy(Block_Past);
 
+        Debug.Log("½ºÆù");
+
         int ranrot = Random.Range(0, 24);
-        Block_Past = Instantiate(Blocks[Random.Range(0, Blocks.Count)]);
+        // int ranIndex = Random.Range(0, Blocks.Count);
+       
+        Block_Past = Instantiate(Blocks[devindex]);
         Vector3 rotation = new Vector3(0, 0, 15) * ranrot;
         Block_Past.GetComponent<Block>().Block_Setting(rotation, new Vector3(0,14.65f,0));
         RotationManager.instance.Reset_Object();
@@ -40,7 +46,7 @@ public class SpawnManager : MonoBehaviour
         
 
 
-        NewWorldManager.instance.SpawnBlock(actualIndex);
+        NewWorldManager.instance.SpawnBlock(actualIndex, devindex);
         Debug.Log(actualIndex);
 
       

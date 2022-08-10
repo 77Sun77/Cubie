@@ -41,7 +41,7 @@ public class AutoIndexer : MonoBehaviour
         {
             for (int y = 0; y < NewWorldManager.height; y++)
             {
-                if (NewWorldManager.gridedSlot[x, y])
+                if (NewWorldManager.gridedSlots[x, y]==NewWorldManager.GridState.Static)
                 {
                     if (!GB_2[x, y])
                     {

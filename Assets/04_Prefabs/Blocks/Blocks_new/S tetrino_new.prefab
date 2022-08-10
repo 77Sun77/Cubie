@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 287415687904850748}
   - component: {fileID: 287415687904850751}
   m_Layer: 0
-  m_Name: T tetrino
+  m_Name: S tetrino_new
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,6 +121,7 @@ Transform:
   - {fileID: 7664697753962739036}
   - {fileID: 6713336793512998903}
   - {fileID: 3484189329758467772}
+  - {fileID: 3033536972013111747}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -136,8 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0561906eaebe846b6d8f040b988f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiAnchor: 0
+  stopMoving: 0
   check: 0
-  anchorPoint: {x: 0, y: 0, z: 0}
   offset: {x: 0, y: -50, z: 0}
   blockPair:
   - {fileID: 287415687803283354}
@@ -149,6 +151,8 @@ MonoBehaviour:
   - {fileID: 7664697753962739036}
   - {fileID: 6713336793512998903}
   - {fileID: 3484189329758467772}
+  SubTransformOffset: {x: 0, y: 0, z: 0}
+  tranform_Sub: {fileID: 0}
 --- !u!1 &1416048987392715019
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416048987392715019}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -413,7 +417,7 @@ GameObject:
   - component: {fileID: 1060975258519555204}
   m_Layer: 0
   m_Name: Ghost(A)
-  m_TagString: Anchor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -510,7 +514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3973233595490227248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -653,6 +657,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6800555319438034592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3033536972013111747}
+  m_Layer: 0
+  m_Name: Anchor_Spin
+  m_TagString: Anchor_Spin
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3033536972013111747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800555319438034592}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 287415687904850748}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7662837056487628097
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ TagManager:
   - Cubie
   - Tetrino
   - Anchor
+  - Transform_Sub
+  - Anchor_Spin
   layers:
   - Default
   - TransparentFX

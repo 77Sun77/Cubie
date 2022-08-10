@@ -24,11 +24,11 @@ public class NewTester : MonoBehaviour
             int roundedX = Mathf.RoundToInt(localLoc.x);
             int roundedY = Mathf.RoundToInt(localLoc.y);
 
-            Debug.Log(roundedX + "," + roundedY);
+            //Debug.Log(roundedX + "," + roundedY);
 
 
-            NewWorldManager.gridedSlot[roundedX, roundedY] = children;
-            Debug.Log("추가");
+            NewWorldManager.gridedSlots[roundedX, roundedY] = NewWorldManager.GridState.Static;
+            //Debug.Log("추가");
 
         }
     }

@@ -18,7 +18,7 @@ public class GridBlock : MonoBehaviour
         Color colur = gameObject.GetComponent<SpriteRenderer>().color;
         colur.a=1;
         gameObject.GetComponent<SpriteRenderer>().color = colur;
-        Debug.Log("점등");
+       // Debug.Log("점등");
     }
 
 
