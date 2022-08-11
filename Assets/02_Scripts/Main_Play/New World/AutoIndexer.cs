@@ -11,7 +11,7 @@ public class AutoIndexer : MonoBehaviour
 
     private void Awake()
     {
-        GB_2 = new GridBlock[NewWorldManager.width, NewWorldManager.height];
+        GB_2 = new GridBlock[NewWorldManager.width_Main, NewWorldManager.height_Main];
     }
 
     private void Start()
@@ -19,14 +19,10 @@ public class AutoIndexer : MonoBehaviour
         for (int i = GB.Length; index < 120; i--)
         {
            
-            GB[index].v = i/ 24+1;
-            GB[index].h = i % 24;
+            GB[index].v = i/ 23;
+            GB[index].h = i % 23;
 
-            if (i % 24 == 0)
-            {
-                GB[index].v -= 1;
-                GB[index].h = 24;
-            }
+         
 
             GB_2[GB[index].h, GB[index].v] = GB[index];
             
@@ -37,22 +33,31 @@ public class AutoIndexer : MonoBehaviour
 
     void Update()
     {
-        for (int x = 0; x < NewWorldManager.width; x++)
+        //if (NewWorldManager.instance.gridedSlots_Main)
+        //{
+        //    Debug.Log(0);
+        //}
+        //else
+        //{
+        //    Debug.Log(1);
+        //}
+
+
+        for (int x = 0; x < NewWorldManager.width_Main; x++)
         {
-            for (int y = 0; y < NewWorldManager.height; y++)
+            for (int y = 0; y < NewWorldManager.height_Main; y++)
             {
-                if (NewWorldManager.gridedSlots[x, y]==NewWorldManager.GridState.Static)
+                if (NewWorldManager.instance.gridedSlots_Main[x, y].transform)
                 {
                     if (!GB_2[x, y])
                     {
-                        Debug.Log("NullRef");
+                        //Debug.Log("NullRef");
                     }
                     else
                     {
                         GB_2[x, y].TurnOn();
                     }
 
-                   
                 }
 
             }

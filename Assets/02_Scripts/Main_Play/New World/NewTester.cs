@@ -27,7 +27,7 @@ public class NewTester : MonoBehaviour
             //Debug.Log(roundedX + "," + roundedY);
 
 
-            NewWorldManager.gridedSlots[roundedX, roundedY] = NewWorldManager.GridState.Static;
+            NewWorldManager.instance.gridedSlots_Main[roundedX, roundedY].transform = transform;
             //Debug.Log("Ãß°¡");
 
         }

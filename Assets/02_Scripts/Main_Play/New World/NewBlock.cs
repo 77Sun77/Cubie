@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class NewBlock : MonoBehaviour
@@ -32,26 +33,19 @@ public class NewBlock : MonoBehaviour
 
     void Start()
     {
-
         curdelay = Time.time;
         foreach (Transform children in transform)
         {
             if (children.tag == "Anchor_Spin")
             {
                 anchorPoint = children.transform.localPosition;
-
             }
-            
             if (children.CompareTag("Transform_Sub"))
             {
                 tranform_Sub = children;
                 SubTransformOffset = children.transform.localPosition;
-
             }
-
         }
-
-
     }
 
     void CheckMultiAnchor()
@@ -72,9 +66,11 @@ public class NewBlock : MonoBehaviour
 
     void Update()
     {
-        CheckSideToSide();
+        
+        CheckSideState();
+        ClearGrid();
         AddToGrid_Movable();
-        //check = ValidMove();
+        
 
         //미리 이동시켜놓고 검증결과가 false일시 다시 원상태로 복귀시키는 코드
         if (Input.GetKeyDown(KeyCode.D))
@@ -103,7 +99,6 @@ public class NewBlock : MonoBehaviour
             curdelay = Time.time;
             if (!ValidMove(1))
             {
-                //transform.position -= new Vector3(0, -1, 0);
                 this.enabled = false;
                 AddToGrid_Static();
 
@@ -118,14 +113,12 @@ public class NewBlock : MonoBehaviour
    {
         transform.position += new Vector3(1, 0, 0);
 
-        //LineUp();
-        CheckSideToSide();
+        
 
         if (ValidMove(0) == false)
         {
             transform.position -= new Vector3(1, 0, 0);
-            //LineUp();
-           // CheckSideToSide();
+            Debug.Log("빠꾸");
             return false;
         }
         return true;
@@ -135,14 +128,14 @@ public class NewBlock : MonoBehaviour
    {
         transform.position += new Vector3(-1, 0, 0);
 
-        //LineUp();
-        CheckSideToSide();
+        ClearGrid();
+        AddToGrid_Movable();
 
         if (ValidMove(0) == false)
         {
             transform.position -= new Vector3(-1, 0, 0);
-           // LineUp();
-            //CheckSideToSide();
+            Debug.Log("빠꾸");
+
             return false;
 
 
@@ -154,8 +147,8 @@ public class NewBlock : MonoBehaviour
    {
         transform.RotateAround(transform.TransformPoint(anchorPoint), new Vector3(0, 0, 1), 90);
 
-        LineUp();
-       // CheckSideToSide();
+        ClearGrid();
+        AddToGrid_Movable();
 
         if (ValidMove(0) == false)
         {
@@ -172,8 +165,8 @@ public class NewBlock : MonoBehaviour
    {
         transform.RotateAround(transform.TransformPoint(anchorPoint), new Vector3(0, 0, 1), -90);
 
-       LineUp();
-        //CheckSideToSide();
+        ClearGrid();
+        AddToGrid_Movable();
 
         if (ValidMove(0) == false)
         {
@@ -218,73 +211,109 @@ public class NewBlock : MonoBehaviour
 
     void AddToGrid_Movable()
     {
-        foreach (Transform children in transform)
+        foreach (Transform children in blockPair)
         {
-            if (!children.CompareTag("Tetrino"))
-                return;
-
             Vector3 localLoc = children.transform.position - offset;
 
             int roundedX = Mathf.RoundToInt(localLoc.x);
             int roundedY = Mathf.RoundToInt(localLoc.y);
 
-            //Debug.Log(roundedX + "," + roundedY);
+            if (roundedX < 0)
+            {
+                NewWorldManager.instance.gridedSlots_Sub[-roundedX, roundedY].transform = children;
+                NewWorldManager.instance.gridedSlots_Sub[-roundedX, roundedY].gridState = GridInfo.GridState.Movable;
+            }
+           else if (roundedX > NewWorldManager.width_Main)
+            {
+                Debug.Log("오버호출");
+                NewWorldManager.instance.gridedSlots_Over[roundedX - 24, roundedY].transform = children;
+                NewWorldManager.instance.gridedSlots_Over[roundedX - 24, roundedY].gridState = GridInfo.GridState.Movable;
+            }
+            else if (0>=roundedX&& roundedX<=NewWorldManager.width_Main)
+            {
+                NewWorldManager.instance.gridedSlots_Main[roundedX , roundedY].transform = children;
+                NewWorldManager.instance.gridedSlots_Main[roundedX, roundedY].gridState = GridInfo.GridState.Movable;
+
+            }
 
 
-            NewWorldManager.gridedSlots[roundedX, roundedY] = NewWorldManager.GridState.Movable;
-            // Debug.Log("추가");
 
         }
     }
 
     void AddToGrid_Static()
     {
-        foreach (Transform children in transform)
+        foreach (Transform children in blockPair)
         {
-            if (!children.CompareTag("Tetrino"))
-                return;
-
-            Vector3 localLoc = children.transform.position-offset;
+            Vector3 localLoc = children.transform.position - offset;
 
             int roundedX = Mathf.RoundToInt(localLoc.x);
             int roundedY = Mathf.RoundToInt(localLoc.y);
 
-            //Debug.Log(roundedX + "," + roundedY);
-
-
-            NewWorldManager.gridedSlots[roundedX, roundedY] = NewWorldManager.GridState.Static;
-           // Debug.Log("추가");
+            //if (roundedX < 0)
+            //{
+            //    NewWorldManager.instance.gridedSlots_Sub[-roundedX, roundedY] = NewWorldManager.GridState.Static;
+            //}
+            //else if (roundedX > NewWorldManager.width_Main)
+            //{
+            //    NewWorldManager.instance.gridedSlots_Over[-roundedX, roundedY] = NewWorldManager.GridState.Static;
+            //}
+            //else
+            {
+                NewWorldManager.instance.gridedSlots_Main[roundedX - 23, roundedY].gridState = GridInfo.GridState.Static;
+            }
 
         }
     }
 
+    //public  async Task MT()
+    //{
+    //    ClearGrid();
+    //    AddToGrid_Movable();
+    //    CheckSideState();
+    //    ClearGrid();
+    //    AddToGrid_Movable();
 
-   public bool ValidMove(int index)
+    //}
+
+
+
+   public  bool ValidMove(int index)
     {
+       
+        ClearGrid();
+        AddToGrid_Movable();
+        CheckSideState();
+        ClearGrid();
+        AddToGrid_Movable();
+
         foreach (Transform children in blockPair)
         {
-          
                 Vector3 localLoc = children.transform.position - offset;
 
                 int roundedX = Mathf.RoundToInt(localLoc.x);
                 int roundedY = Mathf.RoundToInt(localLoc.y) - index;
 
-                //Debug.Log(roundedX + "," + roundedY
-                //아래로 갔을때 이동제한
+            Debug.Log(roundedX+","+ roundedY);
+
+            if (roundedX >= 0 && roundedX <= 23)
+            {
                 if (localLoc.y - index < 1)
                 {
                     return false;
                 }
-                //이미깔려 있는 블럭과 충돌시 움직임을 제한하는 코드
-                if (NewWorldManager.gridedSlots[roundedX, roundedY] == NewWorldManager.GridState.Static)
+                if (NewWorldManager.instance.gridedSlots_Main[roundedX, roundedY].gridState == GridInfo.GridState.Static)
                     return false;
-            
+              
+
+
+            }
         }
         return true;
-
     }
     void CheckSideToSide()
     {
+        return;
         foreach (Transform children in transform)
         { 
             int roundedX = Mathf.RoundToInt(children.transform.position.x);
@@ -293,7 +322,7 @@ public class NewBlock : MonoBehaviour
             {
                 if (children.CompareTag("Tetrino"))
                 {
-                    children.transform.position = new Vector3(NewWorldManager.width - 2, children.transform.position.y, 0);
+                    children.transform.position = new Vector3(NewWorldManager.width_Main - 2, children.transform.position.y, 0);
 
                 }
 
@@ -301,11 +330,11 @@ public class NewBlock : MonoBehaviour
                 {
                     if (multiAnchor)
                     {
-                        MoveDoubleTF(new Vector3(NewWorldManager.width - 2, transform.position.y, 0));
+                        MoveDoubleTF(new Vector3(NewWorldManager.width_Main - 2, transform.position.y, 0));
                     }
                     else
                     {
-                        transform.position = new Vector3(NewWorldManager.width - 2, transform.position.y, 0);
+                        transform.position = new Vector3(NewWorldManager.width_Main - 2, transform.position.y, 0);
                     }
 
                    
@@ -315,7 +344,7 @@ public class NewBlock : MonoBehaviour
                     }
                 }
             }
-            else if (roundedX > NewWorldManager.width-2)          
+            else if (roundedX > NewWorldManager.width_Main-2)          
             {
                 if (children.CompareTag("Tetrino"))
                 {
@@ -331,7 +360,7 @@ public class NewBlock : MonoBehaviour
 
                     if (ValidMove(0) == false)
                     {
-                        transform.position  = new Vector3(NewWorldManager.width - 2, transform.position.y, 0);
+                        transform.position  = new Vector3(NewWorldManager.width_Main - 2, transform.position.y, 0);
                        
                     }
                 }
@@ -391,8 +420,72 @@ public class NewBlock : MonoBehaviour
     }
 
    
+    void ClearGrid()
+    {
+        for (int y = 0; y < NewWorldManager.height_Main; y++)
+        {
+            for (int x = 0; x < NewWorldManager.width_Main; x++)
+            {
+                if (NewWorldManager.instance.gridedSlots_Main[x, y].gridState==GridInfo.GridState.Movable)
+                {
+                    NewWorldManager.instance.gridedSlots_Main[x, y].transform = null;
+                    NewWorldManager.instance.gridedSlots_Main[x, y].gridState = GridInfo.GridState.None;
+
+                }
+            }
+
+            for (int x = 0; x < NewWorldManager.width_Sub; x++)
+            {
+                if (NewWorldManager.instance.gridedSlots_Sub[x, y].gridState == GridInfo.GridState.Movable)
+                {
+                    NewWorldManager.instance.gridedSlots_Sub[x, y].transform = null;
+                    NewWorldManager.instance.gridedSlots_Sub[x, y].gridState = GridInfo.GridState.None;
+
+                }
+            }
+
+            for (int x = 0; x < NewWorldManager.width_Over; x++)
+            {
+                if (NewWorldManager.instance.gridedSlots_Over[x, y].gridState == GridInfo.GridState.Movable)
+                {
+                    NewWorldManager.instance.gridedSlots_Over[x, y].transform = null;
+                    NewWorldManager.instance.gridedSlots_Over[x, y].gridState = GridInfo.GridState.None;
+
+                }
+            }
+
+        }       
+    }
+
+    
+
+    void CheckSideState()
+    {
+        for (int y = 0; y < NewWorldManager.height_Main; y++)
+        {
+            for (int x = 0; x < NewWorldManager.width_Sub; x++)
+            {
+                if (NewWorldManager.instance.gridedSlots_Sub[x, y].transform!=null)
+                {
+                    Debug.Log("Sub:" + x +","+y);
+                    NewWorldManager.instance.gridedSlots_Sub[x, y].transform.position= new Vector3(24-x, NewWorldManager.instance.gridedSlots_Sub[x, y].transform.position.y, 0);
+                }
+            }
+
+            for (int x = 0; x < NewWorldManager.width_Over; x++)
+            {
+                if (NewWorldManager.instance.gridedSlots_Over[x, y].transform)
+                {
+                    Debug.Log("Over:"+x + "," + y);
+                    NewWorldManager.instance.gridedSlots_Over[x, y].transform.position = new Vector3( x, NewWorldManager.instance.gridedSlots_Over[x, y].transform.position.y, 0);
+                }
+            }
 
 
+        }
+    }
 
+
+   
 
 }

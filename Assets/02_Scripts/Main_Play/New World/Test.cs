@@ -1,0 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test : MonoBehaviour
+{
+  
+    private void Start()
+    {
+       // Debug.Log(NewWorldManager.instance.gridedSlots_Main[100, 0]);
+
+    }
+}
