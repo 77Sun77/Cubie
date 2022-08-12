@@ -11,7 +11,7 @@ public class NewWorldManager : MonoBehaviour
     public  GridInfo[,] gridedSlots_Over;
 
     public static int height_Main = 50;
-    public static int width_Main = 23;
+    public static int width_Main = 24;
 
     public static int width_Sub = 5;
     
@@ -37,11 +37,11 @@ public class NewWorldManager : MonoBehaviour
 
 
     public void SpawnBlock(int spawnPoint,int tetrinoIndex)
-   {
+    {
         GameObject go=Instantiate(Tetrinos[tetrinoIndex], new Vector3(spawnPoint, -50+ SpawnHeight, 0),Quaternion.identity);
         go.transform.SetParent(GameObject.Find("New World").transform);
         RotationManager.instance.Set_NewBlock(go.GetComponent<NewBlock>());
-   }
+    }
 
 
 

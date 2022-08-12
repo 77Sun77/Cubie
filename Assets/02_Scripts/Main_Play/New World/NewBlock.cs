@@ -102,7 +102,7 @@ public class NewBlock : MonoBehaviour
                 this.enabled = false;
                 AddToGrid_Static();
 
-                //Debug.Log("스폰");
+               
                 SpawnManager.instance.SpawnBlock();
             }
         }
@@ -147,13 +147,12 @@ public class NewBlock : MonoBehaviour
    {
         transform.RotateAround(transform.TransformPoint(anchorPoint), new Vector3(0, 0, 1), 90);
 
-        ClearGrid();
-        AddToGrid_Movable();
+        
 
         if (ValidMove(0) == false)
         {
             transform.RotateAround(transform.TransformPoint(anchorPoint), new Vector3(0, 0, 1), -90);
-            //LineUp();
+            LineUp();
            // CheckSideToSide();
             return false;
 
@@ -165,13 +164,12 @@ public class NewBlock : MonoBehaviour
    {
         transform.RotateAround(transform.TransformPoint(anchorPoint), new Vector3(0, 0, 1), -90);
 
-        ClearGrid();
-        AddToGrid_Movable();
+       
 
         if (ValidMove(0) == false)
         {
             transform.RotateAround(transform.TransformPoint(anchorPoint), new Vector3(0, 0, 1), 90);
-            //LineUp();
+            LineUp();
             //CheckSideToSide();
             return false;
 
@@ -223,13 +221,13 @@ public class NewBlock : MonoBehaviour
                 NewWorldManager.instance.gridedSlots_Sub[-roundedX, roundedY].transform = children;
                 NewWorldManager.instance.gridedSlots_Sub[-roundedX, roundedY].gridState = GridInfo.GridState.Movable;
             }
-           else if (roundedX > NewWorldManager.width_Main)
+           else if (roundedX > NewWorldManager.width_Main-1)
             {
                 Debug.Log("오버호출");
                 NewWorldManager.instance.gridedSlots_Over[roundedX - 24, roundedY].transform = children;
                 NewWorldManager.instance.gridedSlots_Over[roundedX - 24, roundedY].gridState = GridInfo.GridState.Movable;
             }
-            else if (0>=roundedX&& roundedX<=NewWorldManager.width_Main)
+            else if (0<=roundedX&& roundedX<=NewWorldManager.width_Main-1)
             {
                 NewWorldManager.instance.gridedSlots_Main[roundedX , roundedY].transform = children;
                 NewWorldManager.instance.gridedSlots_Main[roundedX, roundedY].gridState = GridInfo.GridState.Movable;
@@ -260,7 +258,8 @@ public class NewBlock : MonoBehaviour
             //}
             //else
             {
-                NewWorldManager.instance.gridedSlots_Main[roundedX - 23, roundedY].gridState = GridInfo.GridState.Static;
+                
+                NewWorldManager.instance.gridedSlots_Main[roundedX , roundedY].gridState = GridInfo.GridState.Static;
             }
 
         }
@@ -294,19 +293,21 @@ public class NewBlock : MonoBehaviour
                 int roundedX = Mathf.RoundToInt(localLoc.x);
                 int roundedY = Mathf.RoundToInt(localLoc.y) - index;
 
-            Debug.Log(roundedX+","+ roundedY);
+          //  Debug.Log(roundedX+","+ roundedY);
+
+            if (localLoc.y - index < 1)
+            {
+                return false;
+            }
+
+            if (localLoc.y<0)
+                return false;
 
             if (roundedX >= 0 && roundedX <= 23)
             {
-                if (localLoc.y - index < 1)
-                {
-                    return false;
-                }
+
                 if (NewWorldManager.instance.gridedSlots_Main[roundedX, roundedY].gridState == GridInfo.GridState.Static)
                     return false;
-              
-
-
             }
         }
         return true;
@@ -486,6 +487,13 @@ public class NewBlock : MonoBehaviour
     }
 
 
-   
+    void CheckAnchor()
+    {
+
+
+
+
+    }
+
 
 }

@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiAnchor: 1
-  stopMoving: 1
+  stopMoving: 0
   check: 0
   offset: {x: 0, y: -50, z: 0}
   blockPair:

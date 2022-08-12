@@ -16,11 +16,11 @@ public class AutoIndexer : MonoBehaviour
 
     private void Start()
     {
-        for (int i = GB.Length; index < 120; i--)
+        for (int i = GB.Length-1; index < 120; i--)
         {
            
-            GB[index].v = i/ 23;
-            GB[index].h = i % 23;
+            GB[index].v = i/ 24+1;
+            GB[index].h = i % 24;
 
          
 
@@ -43,22 +43,12 @@ public class AutoIndexer : MonoBehaviour
         //}
 
 
-        for (int x = 0; x < NewWorldManager.width_Main; x++)
+        for (int x = 0; x < NewWorldManager.width_Main ; x++)
         {
-            for (int y = 0; y < NewWorldManager.height_Main; y++)
+            for (int y = 0; y < 6; y++)
             {
-                if (NewWorldManager.instance.gridedSlots_Main[x, y].transform)
-                {
-                    if (!GB_2[x, y])
-                    {
-                        //Debug.Log("NullRef");
-                    }
-                    else
-                    {
-                        GB_2[x, y].TurnOn();
-                    }
-
-                }
+                if(NewWorldManager.instance.gridedSlots_Main[x, y].transform)
+                GB_2[x, y].isfilled = (NewWorldManager.instance.gridedSlots_Main[x, y].gridState == GridInfo.GridState.Static); 
 
             }
         }

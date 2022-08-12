@@ -12,15 +12,20 @@ public class GridBlock : MonoBehaviour
    
 
     [ContextMenu("점등")]
-    public void TurnOn()
+   
+
+     void Update()
     {
-        //isfilled = true;
-        Color colur = gameObject.GetComponent<SpriteRenderer>().color;
-        colur.a=1;
-        gameObject.GetComponent<SpriteRenderer>().color = colur;
-       // Debug.Log("점등");
+       if (isfilled)
+        {
+            Color colur = gameObject.GetComponent<SpriteRenderer>().color;
+            colur.a = 1;
+            gameObject.GetComponent<SpriteRenderer>().color = colur;
+        }
+
+
+
+
     }
-
-
 
 }
